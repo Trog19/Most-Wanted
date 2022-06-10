@@ -146,19 +146,19 @@ function displayPeople(people) {
  * in order to easily send the information to the user in the form of an alert().
  * @param {Object} person       A singular object.
  */
-function displayPerson(person) {
-    let personInfo = `First Name: ${person.firstName}\n`;
-    personInfo += `Last Name: ${person.lastName}\n`;
+function displayPerson(foundPerson) {
+    let personInfo = `First Name: ${foundPerson.firstName}\n`;
+    personInfo += `Last Name: ${foundPerson.lastName}\n`;
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
     
-    personInfo += `Gender: ${person.gender}\n`;
-    personInfo += `Date of Birth: ${person.dob}\n`;
-    personInfo += `Height: ${person.height}\n`;
-    personInfo += `Weight: ${person.weight}\n`;
-    personInfo += `Eye Color: ${person.eyeColor}\n`;
-    personInfo += `Occupation: ${person.occupation}\n`;
-    personInfo += `Parents: ${person.parents}\n`;
-    personInfo += `Current Spouse: ${person.currentSpouse}\n`;
+    personInfo += `Gender: ${foundPerson.gender}\n`;
+    personInfo += `Date of Birth: ${foundPerson.dob}\n`;
+    personInfo += `Height: ${foundPerson.height}\n`;
+    personInfo += `Weight: ${foundPerson.weight}\n`;
+    personInfo += `Eye Color: ${foundPerson.eyeColor}\n`;
+    personInfo += `Occupation: ${foundPerson.occupation}\n`;
+    personInfo += `Parents: ${foundPerson.parents}\n`;
+    personInfo += `Current Spouse: ${foundPerson.currentSpouse}\n`;
     alert(personInfo);
 }
 // End of displayPerson()
@@ -212,14 +212,23 @@ function chars(input) {
 
 function searchByTraits(people){
     let userInput = promptFor("Please enter what specific traits you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
+    // let userInput1 = promptFor("Please enter another trait you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
     let userInput2 = promptFor(`Please input relevant data to ${userInput}`, chars)
+    // let userInput3 = promptFor(`Please input relevant data to ${userInput1}`, chars)
     let newArray = people.filter(
         function(person){
             if(person[userInput] === userInput2)
-            return true
-        }
+                return person
+            if(person[userInput1] === userInput3)
+                return newArray
+
+    for [let i =0, responseArray.length, i++ ]{
+        // filter using trait & value   
+    }
+    }
     );
-    return JSON.stringify([newArray])
+    alert (JSON.stringify([newArray]))
+    
 }
 
 
