@@ -63,13 +63,13 @@ function mainMenu(person, people) {
         case "info":
             //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
             // HINT: Look for a person-object stringifier utility function to help
-            displayPerson(person)
+            displayPerson(person[0])
             break;
             
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
-            findPersonFamily(people)
+            findPersonFamily(person[0], people)
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
@@ -83,6 +83,9 @@ function mainMenu(person, people) {
         case "quit":
             // Stop application execution
             return;
+        case "test":
+            console.log(findSib(person[0], people))
+            break;
         default:
             // Prompt user again. Another instance of recursion
             return mainMenu(person, people);
@@ -202,10 +205,10 @@ function chars(input) {
 // @params {Array} people
 // @return Array
 
-function searchByTraits(){
+function searchByTraits(people){
     let userInput = promptFor("Please enter what specific trait you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
     let userInput2 = promptFor(`Please input relevant data to ${userInput}`, chars)
-    let newArray = data.filter(
+    let newArray = people.filter(
         function(person){
             if(person[userInput] === userInput2)
             return true
@@ -215,20 +218,60 @@ function searchByTraits(){
 }
 
 
-function findPersonFamily(people){
-    let newArray = data.filter(
-        function(person){
-            if(person.id === people.currentSpouse || person.id === people.parents)
-            return true
-            else{return false}
-        }
-    );
-    return JSON.stringify([newArray])
+function findPersonFamily(foundPerson, people){
+    let newArray; //newArrayBucket
+    let spouseArray = findSpouse(foundPerson, people)
+    let parentArray = findParents(foundPerson, people)
+    let siblingArray = findSib(foundPerson, people)
+    
+        return newArray
 }
 
-// function findDescendamts(){
-//     let personDescendants = findPersonDescendants(person[0], people);
-//     function 
+function findSpouse(foundPerson, people){
+    let results = people.filter(
+        function(el){
+            if(foundPerson.currentSpouse===el.id) return true
+        }
+    );
 
-// alert(personDescendants)
-// }
+
+
+    return results
+
+}
+
+function findParents(foundPerson, people){
+    let results = people.filter(
+        function(el){
+            if(foundPerson.parents[0] === el.id || foundPerson.parents[1] === el.id) return true
+        }
+    );
+
+    
+    return results
+
+
+}
+
+function findSib(foundPerson, people){
+    let results = people.filter(
+        function(el){
+            if(foundPerson.parents[0] === el.parents[0] || foundPerson.parents[1] === el.parents[1]) return true
+        }
+    );
+
+    
+    return results
+
+
+}
+
+function findDescendants(foundPerson, people){
+    let results = people.filter(
+        function(el){
+        }
+    );
+
+    
+    return results
+}
