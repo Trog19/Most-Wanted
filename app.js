@@ -18,10 +18,7 @@
 function app(people) {
     // promptFor() is a custom function defined below that helps us prompt and validate input more easily
     // Note that we are chaining the .toLowerCase() immediately after the promptFor returns its value
-    let searchType = promptFor(
-        "Do you know the name of the person you are looking for? Enter 'yes' or 'no'",
-        yesNo
-    ).toLowerCase();
+    let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
     let searchResults;
     // Routes our application based on the user's input
     switch (searchType) {
@@ -72,14 +69,12 @@ function mainMenu(person, people) {
         case "family":
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
-            let personFamily = findPersonFamily(person[0], people);
-            alert(personFamily);
+            findPersonFamily(people)
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
-            let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            findPersonDescendants(person[0], people);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -184,7 +179,11 @@ function promptFor(question, valid) {
 function yesNo(input) {
     return input.toLowerCase() === "yes" || input.toLowerCase() === "no";
 }
-// End of yesNo()
+// @param {string}
+// @returns {string}
+// function traits(input){
+//     return input.toLowerCase() === "gender" || input.toLowerCase() === "dob" || input.toLowerCase() === "height" || input.toLowerCase === "weight" || input.toLowerCase === "eyecolor" || input,toLowerCase === "occupation";
+// }
 
 /**
  * This helper function operates as a default callback for promptFor's validation.
@@ -204,8 +203,8 @@ function chars(input) {
 // @return Array
 
 function searchByTraits(){
-    let userInput = promptFor("Please enter what specific trait you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation");
-    let userInput2 = promptFor(`Please input relevant data to ${userInput}`)
+    let userInput = promptFor("Please enter what specific trait you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
+    let userInput2 = promptFor(`Please input relevant data to ${userInput}`, chars)
     let newArray = data.filter(
         function(person){
             if(person[userInput] === userInput2)
@@ -216,3 +215,20 @@ function searchByTraits(){
 }
 
 
+function findPersonFamily(people){
+    let newArray = data.filter(
+        function(person){
+            if(person.id === people.currentSpouse || person.id === people.parents)
+            return true
+            else{return false}
+        }
+    );
+    return JSON.stringify([newArray])
+}
+
+// function findDescendamts(){
+//     let personDescendants = findPersonDescendants(person[0], people);
+//     function 
+
+// alert(personDescendants)
+// }
