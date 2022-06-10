@@ -71,21 +71,26 @@ function mainMenu(person, people) {
             // HINT: Look for a people-collection stringifier utility function to help
             findPersonFamily(person[0], people)
             break;
+
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
-            findPersonDescendants(person[0], people);
+            findPersonDescendants(people);
             break;
+
         case "restart":
             // Restart app() from the very beginning
             app(people);
             break;
+
         case "quit":
             // Stop application execution
             return;
+
         case "test":
-            console.log(findSib(person[0], people))
+            console.log(searchByMultiTraits(person[0], people))
             break;
+
         default:
             // Prompt user again. Another instance of recursion
             return mainMenu(person, people);
@@ -206,7 +211,7 @@ function chars(input) {
 // @return Array
 
 function searchByTraits(people){
-    let userInput = promptFor("Please enter what specific trait you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
+    let userInput = promptFor("Please enter what specific traits you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
     let userInput2 = promptFor(`Please input relevant data to ${userInput}`, chars)
     let newArray = people.filter(
         function(person){
@@ -256,7 +261,8 @@ function findParents(foundPerson, people){
 function findSib(foundPerson, people){
     let results = people.filter(
         function(el){
-            if(foundPerson.parents[0] === el.parents[0] || foundPerson.parents[1] === el.parents[1]) return true
+            if(foundPerson !== el.id)
+                if(foundPerson.parents[0] === el.parents[0] || foundPerson.parents[1] === el.parents[1]) return true
         }
     );
 
@@ -267,11 +273,16 @@ function findSib(foundPerson, people){
 }
 
 function findDescendants(foundPerson, people){
+    let childrenFound = []
     let results = people.filter(
         function(el){
+            if(foundPerson.id === el.parents[0] || foundPerson.id === el.parents[1])return true
         }
     );
-
+        childrenFound = results
+        for (let i=0; results, i < childrenFound.length; i++) {
+            childrenFound = childrenFound.concat(findDescendants(childrenFound[i], people))
     
-    return results
-}
+        }
+    return childrenFound
+    }
