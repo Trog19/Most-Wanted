@@ -88,7 +88,7 @@ function mainMenu(person, people) {
             return;
 
         case "test":
-            console.log(searchByMultiTraits(person[0], people))
+            console.log(searchByTraits(person[0], people))
             break;
 
         default:
@@ -210,26 +210,62 @@ function chars(input) {
 // @params {Array} people
 // @return Array
 
+
+//This works for sorting people based on multiple traits but I am not sure if it meets the userStory criteria of "at once"
 function searchByTraits(people){
-    let userInput = promptFor("Please enter what specific traits you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
-    // let userInput1 = promptFor("Please enter another trait you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccuptation", chars);
+    let userInput = promptFor("Please enter what specific traits you would like to search by:\ngender\ndob\nheight\nweight\neyecolor\noccupation", chars);
     let userInput2 = promptFor(`Please input relevant data to ${userInput}`, chars)
-    // let userInput3 = promptFor(`Please input relevant data to ${userInput1}`, chars)
     let newArray = people.filter(
         function(person){
             if(person[userInput] === userInput2)
                 return person
-            if(person[userInput1] === userInput3)
-                return newArray
+                
+            }
+        );
+        let userInput3 = promptFor("Please enter another trait you wna to search for:\ngender\ndob\nheight\nweight\neyecolor\noccupation", chars)
+        let userInput4 = promptFor(`Please input relevant data to ${userInput3}`, chars)
+        let subArray= people.filter(  
+            function(person){
+            if(person[userInput3] === userInput4)
+                return person
 
-    for [let i =0, responseArray.length, i++ ]{
-        // filter using trait & value   
+            }
+
+        );
+    let userInput5 = promptFor("Please enter another trait you wna to search for:\ngender\ndob\nheight\nweight\neyecolor\noccupation", chars)
+    let userInput6 = promptFor(`Please input relevant data to ${userInput5}`, chars)
+        let subArray1= people.filter(  
+            function(person){
+            if(person[userInput3] === userInput6)
+                return person
+
+            }
+
+        );
+    let userInput7 = promptFor("Please enter another trait you wna to search for:\ngender\ndob\nheight\nweight\neyecolor\noccupation", chars)
+    let userInput8 = promptFor(`Please input relevant data to ${userInput7}`, chars)
+        let subArray2= people.filter(  
+            function(person){
+            if(person[userInput8] === userInput4)
+                return person
+
+            }
+
+        );
+    let userInput9 = promptFor("Please enter another trait you wna to search for:\ngender\ndob\nheight\nweight\neyecolor\noccupation", chars)
+    let userInput10 = promptFor(`Please input relevant data to ${userInput9}`, chars)
+        let subArray3= people.filter(  
+            function(person){
+            if(person[userInput3] === userInput10)
+                return person
+
+            }
+
+        );
+    alert (JSON.stringify([subArray3]))
     }
-    }
-    );
-    alert (JSON.stringify([newArray]))
     
-}
+
 
 
 function findPersonFamily(foundPerson, people){
@@ -240,6 +276,7 @@ function findPersonFamily(foundPerson, people){
     
         return newArray
 }
+alert(JSON.stringify([results]))
 
 function findSpouse(foundPerson, people){
     let results = people.filter(
@@ -253,6 +290,7 @@ function findSpouse(foundPerson, people){
     return results
 
 }
+alert(JSON.stringify([results]))
 
 function findParents(foundPerson, people){
     let results = people.filter(
@@ -266,6 +304,7 @@ function findParents(foundPerson, people){
 
 
 }
+alert (JSON.stringify([results]))
 
 function findSib(foundPerson, people){
     let results = people.filter(
@@ -280,6 +319,7 @@ function findSib(foundPerson, people){
 
 
 }
+alert (JSON.stringify([results]))
 
 function findDescendants(foundPerson, people){
     let childrenFound = []
@@ -295,3 +335,34 @@ function findDescendants(foundPerson, people){
         }
     return childrenFound
     }
+alert (JSON.stringify([childrenFound]))
+//single trait search 
+function searchBYTrait(people){
+    let userInput = promptFor("Please enter another trait you wna to search for:\ngender\ndob\nheight\nweight\neyecolor\occupation", chars)
+    let userInput1 = promptFor(`Please input relevant data to ${userInput9}`, chars)
+    let newArray = people.filter(
+        function(person){
+            if(person[userInput] === userInput1)
+                return person
+
+            }
+        
+        );
+        alert (JSON.stringify([newArray]))
+    }
+
+
+
+    //This is how i think it should be solved just cant figure out how to compare responseArray to person parameters and get userinput included for both the type of trait and the specific search term.
+
+function MultiSearch(responseArray, people){
+    let responseArray = promptFor["gender", "dob", "height", "weight", "eyecolor", "occupation"]
+    let newArray = people.filter(
+        function(person){
+            for(let i=0; results, i < responseArray.length; i++){
+
+            }
+        }
+    )
+
+}
